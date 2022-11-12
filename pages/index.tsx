@@ -144,7 +144,7 @@ const Home: NextPage<Props> = ({ occupations, states }) => {
             onClick={handleSubmitForm} 
             classes={{ root: styles.button }}
             sx={{ 
-              marginTop: 16,
+              marginTop: 1,
               backgroundColor: 'var(--primary)',
               '&:hover': { backgroundColor: 'var(--secondary)' },
               '&:active': { backgroundColor: 'var(--secondary)' }
