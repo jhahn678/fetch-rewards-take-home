@@ -4,6 +4,14 @@ let theme = createTheme({
     typography: {
         fontFamily: ['Rubik','sans-serif',].join(','),
     },
+    palette: {
+        primary: {
+            main: '#271c47',
+        },
+        secondary: {
+            main: '#ffa900',
+        },
+    },
     components: {
         MuiTextField: {
             styleOverrides: {
