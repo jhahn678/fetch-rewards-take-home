@@ -72,6 +72,7 @@ const Home: NextPage<Props> = ({ occupations, states }) => {
       <Image src={'/fetch-logo.png'} height={100} width={100} alt={'Fetch Rewards Logo'} className={styles.logo}/>
       <form className={styles.form}>
           <TextField 
+            required={true}
             label={'Name'} 
             variant={'standard'} 
             color={formState.name.valid ? 'success' : 'primary'}
@@ -81,6 +82,7 @@ const Home: NextPage<Props> = ({ occupations, states }) => {
           />
           <TextField 
             label={'Email'}
+            required={true}
             type={'email'} 
             variant={'standard'} 
             color={formState.email.valid ? 'success' : 'primary'}
@@ -90,6 +92,7 @@ const Home: NextPage<Props> = ({ occupations, states }) => {
           />
           <TextField 
             label={'Password'}
+            required={true}
             variant={'standard'} 
             type={showPassword ? 'text' : 'password'}
             color={formState.password.valid ? 'success' : 'primary'}
@@ -114,7 +117,7 @@ const Home: NextPage<Props> = ({ occupations, states }) => {
           <TextField 
             label="Occupation"
             variant={'standard'}
-            id='occupation-select'
+            required={true}
             select={true}
             value={formState.occupation.value}
             onChange={(e) => dispatch({ type: 'OCCUPATION', value: e.target.value })}
@@ -126,7 +129,7 @@ const Home: NextPage<Props> = ({ occupations, states }) => {
           <TextField 
             label="State"
             variant={'standard'} 
-            id='state-select'
+            required={true}
             select={true}
             value={formState.state.value}
             onChange={(e) => dispatch({ type: 'STATE', value: e.target.value })}
