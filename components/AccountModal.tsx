@@ -1,9 +1,8 @@
 import React from "react";
-import styles from '../../styles/Success.module.css'
+import styles from  "../styles/Success.module.css"
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import List from '@mui/material/List';
 import ListItemText from "@mui/material/ListItemText";
@@ -26,18 +25,16 @@ const AccountModal = ({ visible, setVisible }: Props) => {
         <Dialog onClose={handleClose} open={visible} classes={{ paper: styles.modal }}>
             <DialogTitle>My Account</DialogTitle>
             <DialogContent>
-                <DialogContentText>
-                    { user ?
-                        <List>
-                            <ListItemText primary={<Typography variant={'subtitle2'}>Name</Typography>} secondary={user.name}/>
-                            <ListItemText primary={<Typography variant={'subtitle2'}>Email</Typography>} secondary={user.email}/>
-                            <ListItemText primary={<Typography variant={'subtitle2'}>Account ID</Typography>} secondary={user.id}/>
-                            <ListItemText primary={<Typography variant={'subtitle2'}>Occupation</Typography>} secondary={user.occupation}/>
-                            <ListItemText primary={<Typography variant={'subtitle2'}>State</Typography>} secondary={user.state}/>
-                        </List> :
-                        <Typography variant={'subtitle2'}>No Account Available</Typography>  
-                    }
-                </DialogContentText>
+            { user ?
+                <List>
+                    <ListItemText primaryTypographyProps={{ variant: 'subtitle2' }} primary={"Name"} secondary={user.name}/>
+                    <ListItemText primaryTypographyProps={{ variant: 'subtitle2' }} primary={"Email"} secondary={user.email}/>
+                    <ListItemText primaryTypographyProps={{ variant: 'subtitle2' }} primary={"Account ID"} secondary={user.id}/>
+                    <ListItemText primaryTypographyProps={{ variant: 'subtitle2' }} primary={"Occupation"} secondary={user.occupation}/>
+                    <ListItemText primaryTypographyProps={{ variant: 'subtitle2' }} primary={"State"} secondary={user.state}/>
+                </List> :
+                <Typography variant={'subtitle2'}>No Account Available</Typography>  
+            }
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose}>Dismiss</Button>
