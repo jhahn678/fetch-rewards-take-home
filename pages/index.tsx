@@ -4,8 +4,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useSubmitForm } from '../hooks/mutations/useSubmitForm'
-import { useValidateForm } from '../hooks/utils/useValidateForm'
-import { useEffect, useState } from 'react'
+import { useFormReducer } from '../hooks/utils/useFormReducer'
+import { useState } from 'react'
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment'
@@ -33,15 +33,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
 const Home: NextPage<Props> = ({ occupations, states }) => {
 
   const router = useRouter()
-  const { user, reset, setUser } = useCreatedAccount()
-  const [formState, dispatch] = useValidateForm()
+  const { setUser } = useCreatedAccount()
+
+  const [formState, dispatch] = useFormReducer()
 
   const { submitForm } = useSubmitForm({
     onSuccess: (user) => { 
-        console.log('On Success being called')
-        dispatch({ type: 'RESET_FORM' });
-        setUser(user); 
-        router.push('/success');
+      dispatch({ type: 'RESET_FORM'});
+      setUser(user); 
+      router.push('/success');
     },
     onError: () => toast.error('There was an error creating your account')
   })
@@ -51,8 +51,7 @@ const Home: NextPage<Props> = ({ occupations, states }) => {
   const handleSubmitForm = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     const { name, email, password, occupation, state } = formState;
-    if(!occupation.value || !state.value) return toast.error('All fields are required to continue')
-    submitForm({
+    if(occupation.value && state.value) submitForm({
       name: name.value,
       email: email.value,
       password: password.value,
@@ -61,11 +60,6 @@ const Home: NextPage<Props> = ({ occupations, states }) => {
     })
   }
 
-  useEffect(() => {
-    // fake logout
-    // resets state if navigating back from succcess page
-    if(user) reset()
-  },[])
 
   return (
     <div className={styles.container}>
@@ -125,7 +119,7 @@ const Home: NextPage<Props> = ({ occupations, states }) => {
             value={formState.occupation.value}
             onChange={(e) => dispatch({ type: 'OCCUPATION', value: e.target.value })}
             color={formState.occupation.valid ? 'success' : 'primary'}
-            error={formState.occupation.touched && !formState.state.valid}
+            error={formState.occupation.touched && !formState.occupation.valid}
           >
             {occupations.map(x => <MenuItem key={x} value={x}>{x}</MenuItem>)}
           </TextField>
