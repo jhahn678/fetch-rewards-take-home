@@ -143,6 +143,12 @@ const Home: NextPage<Props> = ({ occupations, states }) => {
             size='large' 
             onClick={handleSubmitForm} 
             classes={{ root: styles.button }}
+            sx={{ 
+              marginTop: 16,
+              backgroundColor: 'var(--primary)',
+              '&:hover': { backgroundColor: 'var(--secondary)' },
+              '&:active': { backgroundColor: 'var(--secondary)' }
+            }}
             disabled={!formState.form.valid}
           >Create Account</Button>
       </form>
